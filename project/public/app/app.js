@@ -1,11 +1,16 @@
-import { handleStatus } from "./ultis/promisse-helpers.js"
+import { handleStatus, log } from "./ultis/promisse-helpers.js"
 
 document
 .querySelector('#myButton')
 .onclick = () => 
     fetch('http://localhost:3000/notas')
     .then(handleStatus)
-    .then(notas => console.log(notas))
-    .catch(console.log)
+    .then(notas => notas.reduce((array, nota) => array.concat(nota.itens), []))
+    
+    .then(itens => {
+        log
+        return itens
+    })
+    .catch(log)
 
     
